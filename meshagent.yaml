@@ -1,9 +1,14 @@
 kind: ServiceTemplate
 version: v1
-name: chatbot
+name: imagebot
+variables:
+- name: "system_prompt"
+environment:
+- name: SYSTEM_PROMPT
+  value: "{system_prompt}"
 ports:
 - num: "*"
   endpoints:
   - path: /agent
-    identity: chatbot
+    identity: imagebot
     type: meshagent.callable
