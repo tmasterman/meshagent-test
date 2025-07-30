@@ -1,4 +1,4 @@
-kind: ChatTemplate
+kind: ServiceTemplate
 version: v1
 name: chatbot
 ports:
