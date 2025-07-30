@@ -1,0 +1,9 @@
+kind: ChatTemplate
+version: v1
+name: chatbot
+ports:
+- num: "*"
+  endpoints:
+  - path: /agent
+    identity: chatbot
+    type: meshagent.callable
