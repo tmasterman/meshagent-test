@@ -1,4 +1,4 @@
-FROM meshagent/python-sdk-slim:latest
+FROM meshagent/cli:latest
 
 ARG MANIFEST_JSON
 LABEL meshagent.service.manifest="$MANIFEST_JSON"
