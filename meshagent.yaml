@@ -12,3 +12,4 @@ ports:
   - path: /agent
     identity: imagebot
     type: meshagent.callable
+  liveness: "/"
