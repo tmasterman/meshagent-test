@@ -1,10 +1,10 @@
 kind: ServiceTemplate
 version: v1
-name: imagebot
+name: codebot
 ports:
-- num: "*"
+- num: "*"                        # automatically assign an available MESHAGENT_PORT for the agent to run on 
+  liveness: "/"               # ensure the service is alive before connecting to the room
   endpoints:
-  - path: /agent
-    identity: imagebot
-    type: meshagent.callable
-  liveness: "/"
+  - path: /codebot                  # service path to call and run the agent on
+    identity: codebot             # name of the agent as it shows up in the Room
+    type: meshagent.callable      # instructs the room server to call this endpoint
