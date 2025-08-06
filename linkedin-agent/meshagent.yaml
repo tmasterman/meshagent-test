@@ -3,7 +3,6 @@ version: v1
 metadata:
   name: linkedin-service
   description: "An agent that can search the web and post to your personal LinkedIn"
-command: python3 main.py
 variables:
 - name: "linkedin_access_token"
 environment:
@@ -15,13 +14,10 @@ ports:
   endpoints:
   - path: /linkedintools
     identity: linkedintools
-    role: tool
     type: meshagent.callable
   - path: /linkedinagent
     identity: linkedinagent
-    role: agent
     type: meshagent.callable
   - path: /linkedinmailagent
     identity: linkedinmailagent
-    role: agent
     type: meshagent.callable
