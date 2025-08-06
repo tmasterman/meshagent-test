@@ -1,7 +1,7 @@
 kind: ServiceTemplate
 version: v1
 metadata:
-  name: linkedinagent
+  name: linkedin-service
   description: "An agent that can search the web and post to your personal LinkedIn"
 command: python3 main.py
 variables:
