@@ -1,0 +1,27 @@
+kind: ServiceTemplate
+version: v1
+metadata:
+  name: linkedinagent
+  description: "An agent that can search the web and post to your personal LinkedIn"
+command: python3 main.py
+variables:
+- name: "linkedin_access_token"
+environment:
+- name: LINKEDIN_ACCESS_TOKEN
+  value: "{linkedin_access_token}"
+ports:
+- num: "*"
+  liveness: "/"
+  endpoints:
+  - path: /linkedintools
+    identity: linkedintools
+    role: tool
+    type: meshagent.callable
+  - path: /linkedinagent
+    identity: linkedinagent
+    role: agent
+    type: meshagent.callable
+  - path: /linkedinmailagent
+    identity: linkedinmailagent
+    type: agent
+    type: meshagent.callable
