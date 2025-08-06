@@ -13,10 +13,10 @@ import logging
 
 from meshagent.agents.mail import room_address
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 otel_config(service_name="linkedin-service")
-log = logging.getLogger("linkedin.toolkit")
+log = logging.getLogger("linkedin")
 
 from linkedin_helper import LinkedInClient # need to import after we set up the logging
 
@@ -165,4 +165,6 @@ class LinkedInMailAgent(MailWorker):
             return await super().start(room=room)
 
 print(f"running on port {service.port}")
+log.info(f"running on port {service.port}")
+log.info("Starting service...")
 asyncio.run(service.run())
