@@ -23,5 +23,5 @@ ports:
     type: meshagent.callable
   - path: /linkedinmailagent
     identity: linkedinmailagent
-    type: agent
+    role: agent
     type: meshagent.callable
