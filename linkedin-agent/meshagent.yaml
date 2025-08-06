@@ -1,45 +1,23 @@
-# kind: ServiceTemplate
-# version: v1
-# metadata:
-#   name: linkedin-service
-#   description: "An agent that can search the web and post to your personal LinkedIn"
-# variables:
-# - name: "linkedin_access_token"
-# environment:
-# - name: LINKEDIN_ACCESS_TOKEN
-#   value: "{linkedin_access_token}"
-# ports:
-# - num: "*"
-#   liveness: "/"
-#   endpoints:
-#   - path: /linkedintools
-#     identity: linkedintools
-#     type: meshagent.callable
-#   - path: /linkedinagent
-#     identity: linkedinagent
-#     type: meshagent.callable
-#   - path: /linkedinmailagent
-#     identity: linkedinmailagent
-#     type: meshagent.callable
 kind: ServiceTemplate
 version: v1
-name: linkedin-service                 
-command: python3 main.py      # command executed inside the container
-variables:                    # exposed in MeshAgent Studio UI as form fields when someone launches the service (parameters collected when launching service)
+metadata:
+  name: linkedin-service
+  description: "An agent that can search the web and post to your personal LinkedIn"
+variables:
 - name: "linkedin_access_token"
-environment:                  # passes variables into the container
+environment:
 - name: LINKEDIN_ACCESS_TOKEN
   value: "{linkedin_access_token}"
 ports:
-- num: "*"                    # automatically assign an available MESHAGENT_PORT for the agent to run on 
-  liveness: "/"               # ensure the service is alive before connecting to the room
+- num: "*"
+  liveness: "/"
   endpoints:
-  - path: /linkedintools      # service path to call and run the toolkit on
-    identity: linkedintools   # name of the toolkit as it shows up in the Room
+  - path: /linkedintools
+    identity: linkedintools
     type: meshagent.callable
-  - path: /linkedinagent      # service path to call and run the agent on
-    identity: linkedinagent   # name of the agent as it shows up in the Room
+  - path: /linkedinagent
+    identity: linkedinagent
     type: meshagent.callable
-  - path: /linkedinmailagent  # service path to call and run the mail agent on
-    identity: linkedinmailagent # name of the mail agent as it shows up in the Room
+  - path: /linkedinmailagent
+    identity: linkedinmailagent
     type: meshagent.callable
