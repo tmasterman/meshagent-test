@@ -20,9 +20,11 @@ log = logging.getLogger("linkedin")
 
 from linkedin_helper import LinkedInClient # need to import after we set up the logging
 
-service = ServiceHost(
-    port=int(os.getenv("MESHAGENT_PORT","7778"))
-)
+# service = ServiceHost(
+#     port=int(os.getenv("MESHAGENT_PORT","7778"))
+# )
+
+service = ServiceHost()
 
 
 def get_linkedin_client() -> LinkedInClient:
