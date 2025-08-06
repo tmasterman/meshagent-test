@@ -1,13 +1,10 @@
 kind: ServiceTemplate
 version: v1
-metadata:                         # This is required - wraps name and description
-  name: chatbot
-  description: "A basic chatbot service"  # Optional but recommended
+name: chatbot
 ports:
 - num: "*"                        # automatically assign an available MESHAGENT_PORT for the agent to run on 
-  liveness: "/"                   # ensure the service is alive before connecting to the room
+  liveness: "/"               # ensure the service is alive before connecting to the room
   endpoints:
   - path: /agent                  # service path to call and run the agent on
     identity: chatbot             # name of the agent as it shows up in the Room
-    role: agent                   # This is required - specifies the role
-    type: meshagent.callable
+    type: meshagent.callable      # instru
