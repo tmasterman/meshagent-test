@@ -15,7 +15,7 @@ from meshagent.agents.mail import room_address
 
 logging.basicConfig(level=logging.INFO)
 
-otel_config(service_name="linkedin-service")
+# otel_config(service_name="linkedin-service")
 log = logging.getLogger("linkedin")
 
 from linkedin_helper import LinkedInClient # need to import after we set up the logging
