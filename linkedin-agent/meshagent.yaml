@@ -12,16 +12,11 @@ variables:
 - name: "email_domain"
   description: "Email domain for receiving messages (default: mail.meshagent.com)"
   optional: true
-- name: "smtp_hostname" 
-  description: "SMTP server hostname (default: mail.meshagent.com)"
-  optional: true
 environment:
 - name: LINKEDIN_ACCESS_TOKEN
   value: "{linkedin_access_token}"
 - name: MESHAGENT_MAIL_DOMAIN
   value: "{email_domain}"
-- name: SMTP_HOSTNAME
-  value: "{smtp_hostname}"
 ports:
 - num: "*"
   liveness: "/"
