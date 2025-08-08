@@ -1,10 +1,9 @@
-import os
 import asyncio
 import logging
 from meshagent.api import RequiredToolkit, RoomClient, ParticipantToken
 from meshagent.api.services import ServiceHost
 from meshagent.agents.chat import ChatBot
-from meshagent.agents.mail import MailWorker, SmtpConfiguration, room_address
+from meshagent.agents.mail import MailWorker, room_address
 from meshagent.openai import OpenAIResponsesAdapter
 from meshagent.openai.tools.responses_adapter import WebSearchTool
 from meshagent.tools import ToolContext, TextResponse
@@ -18,8 +17,7 @@ logging.basicConfig(level=logging.INFO)
 # otel_config(service_name="linkedin-service")
 log = logging.getLogger("linkedin")
 
-
-service = ServiceHost()
+service = ServiceHost()  # defaults to port 8081
 
 
 def get_linkedin_client() -> LinkedInClient:
@@ -149,26 +147,16 @@ class LinkedInMailAgent(MailWorker):
             ],
             requires=[RequiredToolkit(name="linkedin-toolkit")],
             toolkits=[Toolkit(name="web-search", tools=[WebSearchTool()])],
-            domain=os.getenv("MESHAGENT_MAIL_DOMAIN", "mail.meshagent.com"),
-            smtp=SmtpConfiguration(
-                username="linkedinemail",
-                password=os.getenv("MESHAGENT_TOKEN"),
-                hostname=os.getenv("SMTP_HOSTNAME","mail.meshagent.com")
-            ),
         )
 
     async def start(self, *, room: RoomClient):
         parsed_token = ParticipantToken.from_jwt(room.protocol.token, validate=False)
-        print(
-            f"Send an email interact with your mailbot: {room_address(project_id=parsed_token.project_id, room_name=room.room_name)}"
-        )
         log.info(
             f"Send an email interact with your mailbot: {room_address(project_id=parsed_token.project_id, room_name=room.room_name)}"
         )
         return await super().start(room=room)
 
 
-print(f"running on port {service.port}")
 log.info(f"running on port {service.port}")
 log.info("Starting service...")
 for service_path in service.paths:
