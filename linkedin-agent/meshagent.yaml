@@ -3,21 +3,38 @@ version: v1
 metadata:
   name: linkedin-service
   description: "An agent that can search the web and post to your personal LinkedIn"
+command: python3 main.py
 variables:
 - name: "linkedin_access_token"
+  description: "LinkedIn access token for API authentication"
+  optional: false
+  obscure: true
+- name: "email_domain"
+  description: "Email domain for receiving messages (default: mail.meshagent.com)"
+  optional: true
+- name: "smtp_hostname" 
+  description: "SMTP server hostname (default: mail.meshagent.com)"
+  optional: true
 environment:
 - name: LINKEDIN_ACCESS_TOKEN
   value: "{linkedin_access_token}"
+- name: MESHAGENT_MAIL_DOMAIN
+  value: "{email_domain}"
+- name: SMTP_HOSTNAME
+  value: "{smtp_hostname}"
 ports:
 - num: "*"
   liveness: "/"
   endpoints:
   - path: /linkedintools
     identity: linkedintools
+    role: tool
     type: meshagent.callable
   - path: /linkedinagent
     identity: linkedinagent
+    role: agent
     type: meshagent.callable
   - path: /linkedinmailagent
     identity: linkedinmailagent
+    role: agent
     type: meshagent.callable
